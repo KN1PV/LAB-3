@@ -9,79 +9,89 @@ namespace LibraryManagement.Tests
     public class LibraryTests
     {
         [Fact]
-        public void AddBook_ShouldAddBookToLibrary()
+        public void RegisterUser_ShouldAddUserToLibrary()
         {
             var library = new Library();
-            var book = new Book("Test Title", "Test Author");
+            var user = new User("John Doe");
 
+            library.RegisterUser(user);
+
+            Assert.Contains(user, library.Users);
+        }
+
+        [Fact]
+        public void BorrowBook_ShouldAllowUserToBorrowAvailableBook()
+        {
+
+            var library = new Library();
+            var user = new User("John Doe");
+            library.RegisterUser(user);
+
+            var book = new Book("Clean Code", "Robert C. Martin", true);
             library.AddBook(book);
 
-            Assert.Contains(book, library.GetBooks());
+            var result = library.BorrowBook("Clean Code", "John Doe");
+
+            Assert.True(result);
+            Assert.Contains(book, user.BorrowedBooks);
+            Assert.False(book.IsAvailable);
         }
 
         [Fact]
-        public void AddBook_ThrowsException_IfDuplicateTitle()
+        public void ReturnBook_ShouldAllowUserToReturnBorrowedBook()
+        {
+
+            var library = new Library();
+            var user = new User("John Doe");
+            library.RegisterUser(user);
+
+            var book = new Book("Clean Code", "Robert C. Martin", true);
+            library.AddBook(book);
+            library.BorrowBook("Clean Code", "John Doe");
+
+            var result = library.ReturnBook("Clean Code", "John Doe");
+
+            Assert.True(result);
+            Assert.DoesNotContain(book, user.BorrowedBooks);
+            Assert.True(book.IsAvailable);
+        }
+
+        [Fact]
+        public void BorrowBook_ShouldFailIfBookIsAlreadyBorrowed()
         {
             var library = new Library();
-            var book = new Book("Test Title", "Author");
+            var user1 = new User("John Doe");
+            var user2 = new User("Jane Doe");
 
+            library.RegisterUser(user1);
+            library.RegisterUser(user2);
+
+            var book = new Book("Clean Code", "Robert C. Martin", true);
             library.AddBook(book);
 
-            Assert.Throws<InvalidOperationException>(() => library.AddBook(book));
+            library.BorrowBook("Clean Code", "John Doe");
+
+            var result = library.BorrowBook("Clean Code", "Jane Doe");
+
+            Assert.False(result);
+            Assert.DoesNotContain(book, user2.BorrowedBooks);
         }
 
         [Fact]
-        public void RemoveBook_ShouldRemoveBookByTitle()
+        public void ReturnBook_ShouldFailIfUserDidNotBorrowBook()
         {
             var library = new Library();
-            var book = new Book("Test Title", "Test Author");
+            var user = new User("John Doe");
+            library.RegisterUser(user);
+
+            var book = new Book("Clean Code", "Robert C. Martin", true);
             library.AddBook(book);
 
-            library.RemoveBook("Test Title");
+            var result = library.ReturnBook("Clean Code", "John Doe");
 
-            Assert.DoesNotContain(book, library.GetBooks());
+            Assert.False(result);
+            Assert.True(book.IsAvailable);
         }
 
-        [Fact]
-        public void RemoveBook_ThrowsException_IfBookNotFound()
-        {
-            var library = new Library();
-
-            Assert.Throws<KeyNotFoundException>(() => library.RemoveBook("Nonexistent Title"));
-        }
-
-        [Fact]
-        public void IsBookAvailable_ReturnsTrue_IfBookIsAvailable()
-        {
-            var library = new Library();
-            var book = new Book("Available Book", "Author");
-            library.AddBook(book);
-
-            var isAvailable = library.IsBookAvailable("Available Book");
-
-            Assert.True(isAvailable);
-        }
-
-        [Fact]
-        public void IsBookAvailable_ReturnsFalse_IfBookIsUnavailable()
-        {
-            var library = new Library();
-            var book = new Book("Unavailable Book", "Author", isAvailable: false);
-            library.AddBook(book);
-
-            var isAvailable = library.IsBookAvailable("Unavailable Book");
-
-            Assert.False(isAvailable);
-        }
-
-        [Fact]
-        public void IsBookAvailable_ReturnsFalse_IfBookDoesNotExist()
-        {
-            var library = new Library();
-
-            var isAvailable = library.IsBookAvailable("Nonexistent Book");
-
-            Assert.False(isAvailable);
-        }
     }
 }

@@ -4,3 +4,9 @@ C:\Users\vadim\source\repos\LibraryManagement\LibraryManagement\obj\Debug\Librar
 C:\Users\vadim\source\repos\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.csproj.CoreCompileInputs.cache
 C:\Users\vadim\source\repos\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.dll
 C:\Users\vadim\source\repos\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.pdb
+C:\Users\vadim\Documents\GitHub\LAB-3\LibraryManagement\LibraryManagement\bin\Debug\LibraryManagement.dll
+C:\Users\vadim\Documents\GitHub\LAB-3\LibraryManagement\LibraryManagement\bin\Debug\LibraryManagement.pdb
+C:\Users\vadim\Documents\GitHub\LAB-3\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.csproj.AssemblyReference.cache
+C:\Users\vadim\Documents\GitHub\LAB-3\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.csproj.CoreCompileInputs.cache
+C:\Users\vadim\Documents\GitHub\LAB-3\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.dll
+C:\Users\vadim\Documents\GitHub\LAB-3\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.pdb

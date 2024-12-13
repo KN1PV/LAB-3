@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "llhkiwBw3I+bqcmkN5LMp5h079mQ+fhzR6aT8TuTuQF5hCrWrMyO03hEHw8xXP8VoNEhfAPuKU0WYaCYEuBnNw==",
+  "dgSpecHash": "osrSgCkYKqhbCCGYG38qTawihDifPR6If7NqwP3XlUdSxSggStTlfM3+HefkPvIKH4gj8W8WXiSr8BARAjAPKQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vadim\\source\\repos\\LibraryManagement\\LibraryManagement.Tests\\LibraryManagement.Tests.csproj",
+  "projectFilePath": "C:\\Users\\vadim\\Documents\\GitHub\\LAB-3\\LibraryManagement\\LibraryManagement.Tests\\LibraryManagement.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vadim\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\vadim\\.nuget\\packages\\microsoft.codecoverage\\17.6.0\\microsoft.codecoverage.17.6.0.nupkg.sha512",

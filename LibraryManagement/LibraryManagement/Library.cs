@@ -8,39 +8,52 @@ namespace LibraryManagement
 {
     public class Library
     {
-        private readonly Dictionary<string, Book> books = new Dictionary<string, Book>();
+        public List<Book> Books { get; }
+        public List<User> Users { get; }
+
+        public Library()
+        {
+            Books = new List<Book>();
+            Users = new List<User>();
+        }
 
         public void AddBook(Book book)
         {
-            if (book == null)
-                throw new ArgumentNullException(nameof(book));
-
-            if (books.ContainsKey(book.Title))
-                throw new InvalidOperationException($"A book with the title '{book.Title}' already exists.");
-
-            books.Add(book.Title, book);
+            Books.Add(book);
         }
 
-        public void RemoveBook(string title)
+        public void RegisterUser(User user)
         {
-            if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentException("Title cannot be empty.");
-
-            if (!books.Remove(title))
-                throw new KeyNotFoundException($"No book with the title '{title}' found.");
+            if (!Users.Any(u => u.Name == user.Name))
+                Users.Add(user);
         }
 
-        public bool IsBookAvailable(string title)
+        public bool BorrowBook(string title, string userName)
         {
-            if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentException("Title cannot be empty.");
+            var book = Books.FirstOrDefault(b => b.Title == title && b.IsAvailable);
+            var user = Users.FirstOrDefault(u => u.Name == userName);
 
-            return books.TryGetValue(title, out var book) && book.IsAvailable;
+            if (book != null && user != null)
+            {
+                book.IsAvailable = false;
+                user.BorrowedBooks.Add(book);
+                return true;
+            }
+            return false;
         }
 
-        public IEnumerable<Book> GetBooks()
+        public bool ReturnBook(string title, string userName)
         {
-            return books.Values;
+            var user = Users.FirstOrDefault(u => u.Name == userName);
+            var book = user?.BorrowedBooks.FirstOrDefault(b => b.Title == title);
+
+            if (book != null)
+            {
+                book.IsAvailable = true;
+                user.BorrowedBooks.Remove(book);
+                return true;
+            }
+            return false;
         }
     }
 }
