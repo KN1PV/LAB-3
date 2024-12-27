@@ -93,5 +93,18 @@ namespace LibraryManagement.Tests
             Assert.True(book.IsAvailable);
         }
 
+        [Fact]
+        public void Register_User_TracksameUser_OnlyOneUserToBeAdded()
+        {
+            var library = new Library();
+            var user1 = new User("John Doe");
+            var user2 = new User("John Doe");
+
+            library.RegisterUser(user1);
+            /*library.RegisterUser(user2);*/
+
+            Assert.Throws<InvalidOperationException>(() => library.RegisterUser(user2));
+        }
+
     }
 }

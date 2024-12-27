@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "tKxHMdiq9X8PXkeYPvVfBID7FAc78fT7jhmynhq21f6dpFkz7Wnl7FIxLCX71FOggTnYaWvyTUQiKEFGuHRruA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\vadim\\Documents\\GitHub\\LAB-3\\LibraryManagement\\LibraryManagementDemo\\LibraryManagementDemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vadim\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}

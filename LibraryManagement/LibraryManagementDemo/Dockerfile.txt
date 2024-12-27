@@ -1,0 +1,22 @@
+﻿# Етап побудови (Build stage)
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Копіюємо проєктні файли до контейнера
+COPY . ./
+
+# Відновлення залежностей
+RUN dotnet restore
+
+# Публікуємо додаток у режимі Release
+RUN dotnet publish -c Release -o out
+
+# Етап виконання (Runtime stage)
+FROM mcr.microsoft.com/dotnet/runtime:8.0 AS runtime
+WORKDIR /app
+
+# Копіюємо результат побудови з попереднього етапу
+COPY --from=build /app/out ./
+
+# Вказуємо стартовий файл програми
+ENTRYPOINT ["dotnet", "LibraryManagementDemo.dll"]
